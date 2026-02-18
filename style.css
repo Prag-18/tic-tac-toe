@@ -1,0 +1,247 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ================= BACKGROUND ================= */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    overflow: hidden;
+}
+
+/* ================= MAIN APP CARD ================= */
+.app {
+    text-align: center;
+    padding: 40px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    color: white;
+    width: 400px;
+}
+
+/* ================= TITLE ================= */
+.title {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #00f5a0, #00d9f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ================= INFO ================= */
+.info {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.status {
+    margin-top: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* ================= MODE BUTTONS ================= */
+.mode-select {
+    margin: 15px 0;
+}
+
+.mode-select button {
+    padding: 8px 16px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    background: linear-gradient(135deg, #00d9f5, #00f5a0);
+    color: black;
+    transition: 0.3s ease;
+}
+
+.mode-select button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 217, 245, 0.6);
+}
+
+/* ================= DIFFICULTY ================= */
+#difficultyContainer {
+    margin-bottom: 15px;
+    transition: 0.3s ease;
+}
+
+#difficulty {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-weight: 500;
+}
+#difficultyContainer {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.4s ease;
+}
+
+#difficultyContainer.show {
+    max-height: 100px;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+/* ================= GAME BOARD ================= */
+.game {
+    display: grid;
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
+    gap: 15px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+/* ================= BOX ================= */
+.box {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #ffffff;
+
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.box:disabled {
+    opacity: 1;          /* prevent browser dimming */
+    color: #ffffff;
+}
+
+/* ================= WIN HIGHLIGHT ================= */
+.box.win {
+    background: #00f5a0 !important;
+    color: black;
+    box-shadow: 0 0 25px #00f5a0;
+}
+
+/* ================= CONTROL BUTTON ================= */
+.controls {
+    margin-top: 15px;
+}
+
+.reset,
+.new-game {
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    transition: 0.3s ease;
+}
+
+.reset:hover,
+.new-game:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 75, 43, 0.6);
+}
+
+/* ================= POPUP ================= */
+.msg-container {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    animation: fadeIn 0.4s ease;
+}
+
+#msg {
+    font-size: 1.8rem;
+    color: #00f5a0;
+}
+
+.hide {
+    display: none;
+}
+
+/* ================= THINKING ANIMATION ================= */
+.thinking {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.4; }
+    50% { opacity: 1; }
+    100% { opacity: 0.4; }
+}
+
+/* ================= FADE ANIMATION ================= */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 500px) {
+    .app {
+        width: 90%;
+        padding: 25px;
+    }
+
+    .game {
+        grid-template-columns: repeat(3, 70px);
+        grid-template-rows: repeat(3, 70px);
+        gap: 10px;
+    }
+
+    .box {
+        font-size: 2rem;
+    }
+}
+/* ================= CONFETTI ================= */
+
+#confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    width: 8px;
+    height: 15px;
+    opacity: 0.8;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
